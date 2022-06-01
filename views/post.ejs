@@ -1,0 +1,162 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>会议发布</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/sidebar.css">
+
+    <!--Font Awesonme图标库-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<!--mr margin-right -->
+<body>
+
+<div class="container-fluid" > <!--主体容器-->
+    <div class="row flex-lg-nowrap"> <!--防溢出-->
+        <div class="bg-primary sidebar-div sticky-top" style="width: 240px;" >  <!--侧边导航栏-->
+            <% if (usertype === 'undefined'){ %>
+            <%- include("unlogsidebar.ejs")%>
+            <% }%>
+            <% if (usertype === 'unit'){ %>
+            <%- include("orgsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+            <% if (usertype === 'person'){ %>
+            <%- include("personsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+        </div><!--侧边导航栏-->
+
+
+        <div class="bg-light col">  <!--网页主体-->
+            <!--头部导航栏-->
+            <%- include("headnavbar.ejs", {page_title:"会议发布"})%>
+            <!--头部导航栏-->
+            <div class="container">
+                <div class="row bg-white" style="margin-top: 2rem;margin-bottom: 1rem; border: 2px solid #e9eef2">
+                    <div class="col">
+                        <form id="form" class="needs-validation" novalidate> <!--needs-validation这个class应该在js中作为选择的标准-->
+                            <label for="meettitle" style="font-size: 1.2rem;margin-top:0.5rem">会议标题</label><label style="color: #dc3545">*</label>
+                            <div class="form-row">
+                                <div class="col-lg-6 ">
+                                    <input type="text" class="form-control" id="meettitle" required placeholder="请输入会议标题..">
+                                    <div class="invalid-feedback">请输入会议的标题</div>
+                                </div>
+                            </div>
+
+                            <label for="org" style="font-size: 1.2rem;margin-top:0.5rem">主办机构</label><label style="color: #dc3545">*</label>
+                            <div class="form-row">
+
+                                <div class="col-auto">
+                                    <input class="form-control" id="org" required placeholder="请输入主办机构..">
+                                    <div class="invalid-feedback">请输入会议的主办机构</div>
+                                </div>
+                            </div>
+
+                            <label for="Place" style="font-size: 1.2rem; margin-top: 0.5rem">主办地点</label><label style="color: #dc3545">*</label>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control" id="province" required placeholder="省..">
+                                    <div class="invalid-feedback">请输入主办地点所在省份</div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <input type="text" class="form-control" id="city" required placeholder="市..">
+                                    <div class="invalid-feedback">请输入主办地点所在城市</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" id="district" required placeholder="区..">
+                                    <div class="invalid-feedback">请输入主办地点所在区</div>
+                                </div>
+                            </div>
+
+                            <label for="Date Range" style="font-size: 1.2rem; ">起止日期</label><label style="color: #dc3545">*</label>
+                            <div class="form-row">
+                                <div class="col-auto">
+                                    <input type="date" class="form-control" id="startDate" required>
+                                    <div class="invalid-feedback">请选择会议开始日期</div>
+                                </div>
+                                <label style="font-size: 1rem; margin-left: 1rem; margin-right: 1rem;">至</label>
+                                <div class="col-auto">
+                                    <input type="date" class="form-control" id="endDate" required>
+                                    <div class="invalid-feedback">请选择会议结束日期</div>
+                                </div>
+                            </div>
+
+                            <label for="paperDate" style="font-size: 1.2rem; margin-top: 1rem">截稿时间</label><label style="color: #dc3545">*</label>
+                            <div class="form-row">
+                                <div class="col-auto">
+                                    <input type="datetime-local" class="form-control" id="paperDate" required>
+                                    <div class="invalid-feedback">请于会议开始日期前选择截稿时间</div>
+                                </div>
+                            </div>
+
+                            <label for="infoDate" style="font-size: 1.2rem; margin-top: 1rem">录用通知时间</label><label style="color: #dc3545">*</label>
+                            <div class="form-row">
+                                <div class="col-auto">
+                                    <input type="datetime-local" class="form-control" id="infoDate" required>
+                                    <div class="invalid-feedback">请于截稿时间之后选择录取通知时间</div>
+                                </div>
+                            </div>
+
+                            <label for="regDate" style="font-size: 1.2rem; margin-top: 1rem">注册截止时间</label><label style="color: #dc3545">*</label>
+                            <div class="form-row">
+                                <div class="col-auto">
+                                    <input type="datetime-local" class="form-control" id="regDate" required>
+                                    <div class="invalid-feedback">请于录取通知时间之后选择注册截止时间</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label for="meetdes" style="font-size: 1.2rem;">会议简介</label><label style="color: #dc3545">*</label>
+                                <textarea class="form-control" id="meetdes" required rows="7"></textarea>
+                                <div class="invalid-feedback">请填写会议简介</div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label for="paperdes" style="font-size: 1.2rem;">征文要求</label><label style="color: #dc3545">*</label>
+                                <textarea class="form-control" id="paperdes" required rows="7"></textarea>
+                                <div class="invalid-feedback">请填写征文要求</div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 2rem;" >
+                                <label for="arrange" style="font-size: 1.2rem;">日程安排</label>
+                                <textarea class="form-control" id="arrange" rows="7" placeholder="" style="background: #ffffff" ></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-outline-primary" id="button" style="margin-bottom: 1rem;">发布</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://cdn.staticfile.org/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+<script src="/socket.io/socket.io.js"></script> <!-- this script is provided by socket.io at runtime -->
+<script>
+    var creator = '<%=username%>'
+</script>
+<script src="/js/post.js"></script>
+</body>
+</html>

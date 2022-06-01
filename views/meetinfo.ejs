@@ -1,0 +1,117 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>会议概览</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/sidebar.css">
+
+    <!--Font Awesonme图标库-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<!--mr margin-right -->
+<body>
+
+<div class="container-fluid" > <!--主体容器-->
+    <div class="row flex-lg-nowrap"> <!--防溢出-->
+        <div class="bg-primary sidebar-div sticky-top" style="width: 240px;" >  <!--侧边导航栏-->
+            <% if (usertype === 'undefined'){ %>
+                <%- include("unlogsidebar.ejs")%>
+            <% }%>
+            <% if (usertype === 'unit'){ %>
+                <%- include("orgsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+            <% if (usertype === 'person'){ %>
+                <%- include("personsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+        </div><!--侧边导航栏-->
+
+        <div class="bg-light col">  <!--网页主体-->
+
+            <!--头部导航栏-->
+
+            <%- include("headnavbar.ejs", {page_title:'会议概览'})%>
+            <!--头部导航栏-->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="btn-group" role="group" style="padding: 0.5rem">
+                            <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">日期筛选</button>
+                                <form class="dropdown-menu px-4 py-3" id="date_form">
+                                    <div class="form-group">
+                                        <label for="start_date">会议开始时间</label>
+                                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="end_date">会议结束时间</label>
+                                        <input type="date" class="form-control" id="end_date" name="end_date" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">检索</button>
+                                </form>
+                            <button type="button" class="btn btn-outline-success" style="margin-left: 0.5rem" id="asc">升序</button>
+                            <button type="button" class="btn btn-outline-success" id="desc">降序</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bg-white" style="margin-bottom: 1rem; border: 2px solid #e9eef2">
+                    <div class="col">
+                        <ul class="list-group list-group-flush"> <!--会议列表-->
+                            <% for(let i = 0; i < confer.length; ++i){ %>
+                            <li class="list-group-item row">
+                                <div class="col">
+                                    <h5><a style="text-decoration:none; color: black"><%= confer[i].title %></a></h5>
+                                    <h6>日期: <%= confer[i].important_dates.conference_start %> 至 <%= confer[i].important_dates.conference_end %></h6>
+                                    <h6>地点: <%= confer[i].location %></h6>
+                                    <h6>主办机构: <%= confer[i].org %></h6>
+                                </div>
+                                <div class="col">
+                                    <a href="/conference/<%= confer[i]._id%>">
+                                        <button type="button" class="btn btn-outline-info">查看详情</button>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+
+                <%- include('page_index.ejs', {page: page})%>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://cdn.staticfile.org/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+<script src="/socket.io/socket.io.js"></script> <!-- this script is provided by socket.io at runtime -->
+<script src="/js/init.js"></script>
+<script src="/js/meetinfo.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>投稿审阅</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/sidebar.css">
+
+    <!--Font Awesonme图标库-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<!--mr margin-right -->
+<body>
+
+<div class="container-fluid" > <!--主体容器-->
+    <div class="row flex-lg-nowrap"> <!--防溢出-->
+        <div class="bg-primary sidebar-div sticky-top" style="width: 240px;" >  <!--侧边导航栏-->
+            <% if (usertype === 'undefined'){ %>
+            <%- include("unlogsidebar.ejs")%>
+            <% }%>
+            <% if (usertype === 'unit'){ %>
+            <%- include("orgsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+            <% if (usertype === 'person'){ %>
+            <%- include("personsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+        </div><!--侧边导航栏-->
+
+        <div class="bg-light col">  <!--网页主体-->
+
+            <!--头部导航栏-->
+            <%- include("headnavbar.ejs", {page_title:'稿件详情'})%>
+            <!--头部导航栏-->
+
+            <label id="_id" hidden><%=paper._id%></label>
+            <label id="cid" hidden><%=cid%></label>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="btn-group" role="group" style="padding: 0.5rem">
+                            <a href="/conference/<%=cid%>/review">
+                                <button type="button" class="btn btn-outline-success">稿件列表</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row bg-white" style="margin-bottom: 1rem; border: 2px solid #e9eef2;">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem">论文标题</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem"><%=paper.title%></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem">第一作者</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem"><%=paper.firstau%></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem">第二作者</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem"><%=paper.secondau%></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem">第三作者</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem"><%=paper.thirdau%></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem">所属机构</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem"><%=paper.org%></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem">摘要</label>
+                            </div>
+                            <div class="col">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem"><%=paper.abstract%></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 1.2rem;margin-top:0.5rem">评审意见</label>
+                            <textarea class="form-control" id="review_opinion" rows="7"></textarea>
+                        </div>
+                        <div class="row justify-content-between" style="padding-bottom: 1rem">
+                            <div style="margin-left: 1rem">
+                                <button class="btn btn-outline-primary" onclick="window.open(window.location.pathname + '/download')">稿件下载</button>
+                            </div>
+                            <div style="margin-right: 1rem">
+                                <button class="btn btn-outline-success" onclick="pass()">录用</button>
+                                <button class="btn btn-outline-warning" onclick="modify()">修改后录用</button>
+                                <button class="btn btn-outline-danger" onclick="reject()">拒绝</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://cdn.staticfile.org/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+<script src="/socket.io/socket.io.js"></script> <!-- this script is provided by socket.io at runtime -->
+<script src="/js/init.js"></script>
+<script src="/js/review_detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>修改会议信息</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/sidebar.css">
+
+    <!--Font Awesonme图标库-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<!--mr margin-right -->
+<body>
+
+<div class="container-fluid" > <!--主体容器-->
+    <div class="row flex-lg-nowrap"> <!--防溢出-->
+        <div class="bg-primary sidebar-div sticky-top" style="width: 240px;" >  <!--侧边导航栏-->
+            <% if (usertype === 'undefined'){ %>
+            <%- include("unlogsidebar.ejs")%>
+            <% }%>
+            <% if (usertype === 'unit'){ %>
+            <%- include("orgsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+            <% if (usertype === 'person'){ %>
+            <%- include("personsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+        </div><!--侧边导航栏-->
+
+        <div class="bg-light col">  <!--网页主体-->
+
+            <!--头部导航栏-->
+            <%- include("headnavbar.ejs", {page_title: conference.title + " / 更新会议信息"})%>
+            <!--头部导航栏-->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="btn-group" role="group" style="padding: 0.5rem">
+                            <a href="/mymeetings">
+                                <button type="button" class="btn btn-outline-success">会议列表</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bg-white" style="margin-bottom: 1rem; border: 2px solid #e9eef2">
+                    <div class="col">
+                        <form id="updateform" role="form">
+                            <div class="form-group row justify-content-center " style="margin-top: 1rem">
+                                <h3><%=conference.title%></h3>
+                            </div>
+
+                            <div class="form-group row align-items-center" style="margin-left: 0.5rem">
+                                <label for="org" class="col-form-label" style="font-size: 1.2rem;">主办机构:</label>
+                                <div class="col">
+                                    <input type="text" readonly class="form-control-plaintext" style="font-size: 1.2rem;" id="org" value="<%=conference.org%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center" style="margin-left: 0.5rem">
+                                <label for="place" class="col-form-label" style="font-size: 1.2rem;">主办地点:</label>
+                                <div class="col">
+                                    <input type="text" readonly class="form-control-plaintext" style="font-size: 1.2rem;" id="place" value="<%=conference.location%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center" style="margin-left: 0.5rem">
+                                <label for="date" class="col-form-label" style="font-size: 1.2rem;">会议日期:</label>
+                                <div class="col">
+                                    <input type="text" readonly class="form-control-plaintext" style="font-size: 1.2rem;" id="date" value="<%=csformat%> 至 <%=ceformat%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center" style="margin-left: 0.5rem">
+                                <label for="paperend" class="col-form-label" style="font-size: 1.2rem;">截稿时间:</label>
+                                <div class="col">
+                                    <input type="text" readonly class="form-control-plaintext" style="font-size: 1.2rem;" id="paperend" value="<%=peformat%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center" style="margin-left: 0.5rem">
+                                <label for="informend" class="col-form-label" style="font-size: 1.2rem;">录用通知时间:</label>
+                                <div class="col">
+                                    <input type="text" readonly class="form-control-plaintext" style="font-size: 1.2rem;" id="informend" value="<%=ieformat%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center" style="margin-left: 0.5rem">
+                                <label for="registerend" class="col-form-label" style="font-size: 1.2rem;">注册截止时间:</label>
+                                <div class="col">
+                                    <input type="text" readonly class="form-control-plaintext" style="font-size: 1.2rem;" id="registerend" value="<%=reformat%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1rem; margin-left: 0.5rem" >
+                                <label for="des" style="font-size: 1.2rem;">会议简介</label><label style="color: #dc3545">*</label>
+                                <textarea class="form-control" id="des" rows="7" style="background: #ffffff" required><%=conference.description%></textarea>
+                            </div>
+
+
+                            <div class="form-group" style="margin-top: 2rem; margin-left: 0.5rem" >
+                                <label for="info" style="font-size: 1.2rem;">征文要求</label><label style="color: #dc3545">*</label>
+                                <textarea class="form-control" id="info" rows="7" style="background: #ffffff" required><%=conference.paper_info%></textarea>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 2rem; margin-left: 0.5rem" >
+                                <label for="arrange" style="font-size: 1.2rem;">日程安排</label>
+                                <textarea class="form-control" id="arrange" rows="7" style="background: #ffffff" ><%=conference.conferarrange%></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary" id="button" style="margin-bottom: 1rem;margin-left: 0.5rem" onclick="update()">更新</button>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://cdn.staticfile.org/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script> <!-- this script is provided by socket.io at runtime -->
+<script>
+    var cid = '<%=conference._id%>';
+</script>
+<script src="/js/updateinfo.js"></script>
+</body>
+</html>

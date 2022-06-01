@@ -1,0 +1,191 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>修改会议信息</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/sidebar.css">
+
+    <!--Font Awesonme图标库-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<!--mr margin-right -->
+<body>
+
+<div class="container-fluid" > <!--主体容器-->
+    <div class="row flex-lg-nowrap"> <!--防溢出-->
+        <div class="bg-primary sidebar-div sticky-top" style="width: 240px;" >  <!--侧边导航栏-->
+            <div class="container-fluid navbar-dark bg-dark side-main-contain"><!--侧边导航栏容器-->
+                <div class="row side-nav-header "> <!--头部商标等-->
+                    <a class="navbar-brand " href="#">
+                        <i class="fas fa-user-check fa-3x"></i>
+                    </a>
+
+                    <!--三明治导航栏-->
+                    <!--
+                    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"   data-target="#sidebar-collapse">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    -->
+
+                </div> <!--头部商标end-->
+
+                <div class="row navbar-dark bg-dark"> <!--侧面导航栏主体-->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link side-nav-link active" href="#"><i class="fas fa-address-card"></i> 法人信息</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link side-nav-link active" href="mymeetings.html"><i class="far fa-edit"></i> 会议管理</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link side-nav-link active" href="post.html"><i class="fas fa-external-link-alt"></i> 发布会议</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link side-nav-link active" href="meetinfo.html"><i class="fas fa-list-ul"></i> 会议概览</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link side-nav-link active" href="#"><i class="fas fa-sign-out-alt"></i> 退出登录</a>
+                        </li>
+                    </ul>
+                </div><!--侧面导航栏主体-->
+            </div>
+        </div><!--侧边导航栏-->
+
+        <div class="bg-light col">  <!--网页主体-->
+
+            <!--头部导航栏-->
+            <div class="navbar navbar-light main-navbar" style="background-color: #e3f2fd">
+                <a class="navbar-brand" href="#">修改会议信息</a>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search.." aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            <!--头部导航栏-->
+
+            <div class="container">
+                <div class="row bg-white" style="margin-top: 2rem;margin-bottom: 1rem; border: 2px solid #e9eef2">
+                    <div class="col">
+                        <form id="updateform" role="form">
+                            <label for="meettitle" style="font-size: 1.2rem;margin-top:0.5rem" >会议标题</label>
+                            <div class="form-row">
+
+                                <div class="col-md-3">
+                                    <input type="email" class="form-control" id="meettitle" placeholder="XXXXXXX" readonly="readonly">
+                                </div>
+                            </div>
+
+                            <label for="host" style="font-size: 1.2rem;margin-top:0.5rem">主办机构</label>
+                            <div class="form-row">
+
+                                <div class="col-md-3">
+                                    <input type="email" class="form-control" id="host" placeholder="北京航空航天大学" readonly="readonly">
+                                </div>
+                            </div>
+
+                            <label for="province" style="font-size: 1.2rem; margin-top: 1rem">主办地点</label>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control" id="province" placeholder="北京市" readonly="readonly">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <input type="text" class="form-control" id="city" placeholder="北京市" readonly="readonly">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <input type="text" class="form-control" id="district" placeholder="海淀区" readonly="readonly">
+                                </div>
+                            </div>
+
+                            <label for="Date Range" style="font-size: 1.2rem;">起止日期</label>
+                            <div class="form-row">
+
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="2018年" id="startyear" readonly="readonly">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="8月" id="starmonth" readonly="readonly">
+                                </div>
+                                <div class="col">
+                                    <input type="text"  class="form-control" placeholder="12日" id="startday" readonly="readonly">
+                                </div>
+                                <label style="font-size: 1rem; margin-left: 1rem; margin-right: 1rem;">至</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="2018年" id="endyear" readonly="readonly">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="8月" id="endmonth" readonly="readonly">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="20日" id="endday" readonly="readonly">
+                                </div>
+
+
+                            </div>
+
+                            <label for="" style="font-size: 1.2rem;">投稿截止日期</label>
+                            <div class="form-row">
+
+                                <div class="col">
+                                    <input type="text" class="form-control" required placeholder="2018年" id="ddlyear">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" required placeholder="8月" id="ddlmonth">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" required placeholder="3日" id="ddlday">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label for="meetdes" style="font-size: 1.2rem;">会议简介</label>
+                                <textarea class="form-control" id="meetdes" rows="7" placeholder="这里是会议的简要介绍" readonly="readonly"></textarea>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label for="paperdes" style="font-size: 1.2rem;">征文要求</label>
+                                <textarea class="form-control" id="paperdes" rows="7" placeholder="这里是本次会议征文的要求" readonly="readonly"></textarea>
+                            </div>
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label for="arrangement" style="font-size: 1.2rem;">日程安排</label>
+                                <textarea class="form-control" id="arrangement" required rows="7" placeholder="这里是本次会议日程安排"></textarea>
+                            </div>
+
+                            <button onclick="update()" type="submit" class="btn btn-primary btn-dark" style="margin-bottom: 1rem;" id="update">更新</button>
+
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="/public/js/updateinfo.js"></script>
+</body>
+</html>

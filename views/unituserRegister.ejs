@@ -1,0 +1,125 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>申请成为单位用户</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/sidebar.css">
+
+    <!--Font Awesonme图标库-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<!--mr margin-right -->
+<body>
+
+<div class="container-fluid" > <!--主体容器-->
+    <div class="row flex-lg-nowrap"> <!--防溢出-->
+        <div class="bg-primary sidebar-div sticky-top" style="width: 240px;" >  <!--侧边导航栏-->
+            <% if (usertype === 'undefined'){ %>
+            <%- include("unlogsidebar.ejs")%>
+            <% }%>
+            <% if (usertype === 'unit'){ %>
+            <%- include("orgsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+            <% if (usertype === 'person'){ %>
+            <%- include("personsidebar.ejs",{username: username, usertype:usertype})%>
+            <% }%>
+        </div><!--侧边导航栏-->
+
+
+        <div class="bg-light col">  <!--网页主体-->
+
+            <!--头部导航栏-->
+
+            <%- include("headnavbar.ejs", {page_title:'单位用户注册'})%>
+            <!--头部导航栏-->
+
+
+            <div class="bg-light col">  <!--网页主体-->
+                <div class="container">
+                    <div class="row bg-white" style="margin-top: 2rem;margin-bottom: 1rem; border: 2px solid #e9eef2">
+                        <div class="col">
+                            <form id="applyform">
+                                <label style="font-size: 1.2rem;margin-top:0.5rem">机构名称</label>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <input class="form-control" id="institution" placeholder="请输入机构名称..">
+                                    </div>
+                                </div>
+
+                                <label style="font-size: 1.2rem; margin-top: 1rem">所在区域</label>
+                                <div class="form-row">
+                                    <div class="form-group col-md-2">
+                                        <input type="text" class="form-control" id="province" required placeholder="省..">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <input type="text" class="form-control" id="city" required placeholder="市..">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <input type="text" class="form-control" id="district" required placeholder="区..">
+                                    </div>
+                                </div>
+
+                                <label style="font-size: 1.2rem; margin-top: 1rem">通讯地址</label>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <input type="text" class="form-control" id="connectAdd" required placeholder="请输入通讯地址..">
+                                    </div>
+                                </div>
+                                <label style="font-size: 1.2rem; margin-top: 1rem">机构负责人</label>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <input type="text" class="form-control" id="manager" required placeholder="请输入负责人姓名..">
+                                    </div>
+                                </div>
+                                <label style="font-size: 1.2rem; margin-top: 1rem">负责人电话</label>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <input type="text" class="form-control" id="telphone" required placeholder="请输入负责人电话..">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-top: 1rem;">
+                                    <label style="font-size: 1.2rem;">机构简介</label>
+                                    <textarea class="form-control" id="introduction" rows="7"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="margin-bottom: 1rem;">确认提交</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+<script src="/socket.io/socket.io.js"></script> <!-- this script is provided by socket.io at runtime -->
+<script src="/js/unituserRegister.js"></script>
+
+</body>
+</html>
